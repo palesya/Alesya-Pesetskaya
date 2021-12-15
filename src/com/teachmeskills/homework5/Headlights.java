@@ -11,14 +11,14 @@ boolean headlightsOn;
     }
 
     public void turnHeadlightsOn(){
-    if (!headlightsOn){
-        headlightsOn=true;
+    if (!this.headlightsOn){
+        this.headlightsOn=true;
     }
 }
 
     public void turnHeadlightsOff(){
-        if (headlightsOn){
-            headlightsOn=false;
+        if (this.headlightsOn){
+            this.headlightsOn=false;
         }
     }
 

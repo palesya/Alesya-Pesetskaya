@@ -6,3 +6,4 @@ public enum Position {
     Neutral,
     Reverse;
 }
+

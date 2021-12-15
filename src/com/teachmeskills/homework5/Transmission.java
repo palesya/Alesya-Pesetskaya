@@ -1,17 +1,18 @@
 package com.teachmeskills.homework5;
 
-import static com.teachmeskills.homework5.Position.Neutral;
-import static com.teachmeskills.homework5.Position.Parking;
-
 public class Transmission {
     Enum Position;
 
-    public void changePosition(Enum Position) {
-        this.Position = Position;
-    }
-
     public Transmission(Enum position) {
         Position = position;
+    }
+
+    public void changePosition(Enum position) {
+        if (this.Position != position){
+            this.Position=position;
+        }else {
+            System.out.println("Car is already in selected Position "+ this.Position);
+        }
     }
 
     @Override
