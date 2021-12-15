@@ -53,27 +53,27 @@ public class Car {
 
     //переключить передачу
     public void changePosition() {
-        boolean positionExists = false;
         boolean positionSelected = false;
         String printedPosition = "";
-        while (!positionExists && !positionSelected) {
+        while (!positionSelected) {
             System.out.println("Enter new allowed position (Parking,Drive,Neutral,Reverse) except current position: " + this.transmissions.Position);
             Scanner scanner = new Scanner(System.in);
             printedPosition = scanner.next();
-            for (Position el : Position.values()) {
-                if (el.name().equalsIgnoreCase(printedPosition) && el != this.transmissions.Position) {
-                    positionExists = true;
-                    positionSelected = true;
-                    break;
+            boolean positionExists = false;
+            while (!positionExists) {
+                for (Position el : Position.values()) {
+                    if (el.name().equalsIgnoreCase(printedPosition) && el == this.transmissions.Position) {
+                        System.out.println("Car is already in selected Position " + this.transmissions.Position);
+                        positionExists = true;
+                    }
+                    if (el.name().equalsIgnoreCase(printedPosition) && el != this.transmissions.Position) {
+                        positionExists = true;
+                        positionSelected = true;
+                    }
                 }
-                if (el.name().equalsIgnoreCase(printedPosition) && el == this.transmissions.Position) {
-                    System.out.println("Car is already in selected Position " + this.transmissions.Position);
-                    positionExists = true;
-                    break;
+                if (!positionExists) {
+                    System.out.println("You've entered not existing position");
                 }
-            }
-            if (!positionExists) {
-                System.out.println("You've entered not existing position");
             }
         }
         Enum newPosition = Position.valueOf(printedPosition);
