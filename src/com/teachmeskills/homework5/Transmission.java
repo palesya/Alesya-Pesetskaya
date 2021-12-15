@@ -8,10 +8,8 @@ public class Transmission {
     }
 
     public void changePosition(Enum position) {
-        if (this.Position != position){
-            this.Position=position;
-        }else {
-            System.out.println("Car is already in selected Position "+ this.Position);
+        if (this.Position != position) {
+            this.Position = position;
         }
     }
 

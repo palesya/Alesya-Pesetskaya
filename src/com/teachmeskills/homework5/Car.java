@@ -54,23 +54,30 @@ public class Car {
     //переключить передачу
     public void changePosition() {
         boolean positionExists = false;
+        boolean positionSelected = false;
         String printedPosition = "";
-        while (!positionExists) {
+        while (!positionExists && !positionSelected) {
             System.out.println("Enter new allowed position (Parking,Drive,Neutral,Reverse) except current position: " + this.transmissions.Position);
             Scanner scanner = new Scanner(System.in);
             printedPosition = scanner.next();
             for (Position el : Position.values()) {
-                if(el.name().equalsIgnoreCase(printedPosition)) {
+                if (el.name().equalsIgnoreCase(printedPosition) && el != this.transmissions.Position) {
+                    positionExists = true;
+                    positionSelected = true;
+                    break;
+                }
+                if (el.name().equalsIgnoreCase(printedPosition) && el == this.transmissions.Position) {
+                    System.out.println("Car is already in selected Position " + this.transmissions.Position);
                     positionExists = true;
                     break;
-
-                } else {
-                    System.out.println("You've entered not existing position");
                 }
             }
-            Enum newPosition = Position.valueOf(printedPosition);
-            this.transmissions.changePosition(newPosition);
+            if (!positionExists) {
+                System.out.println("You've entered not existing position");
+            }
         }
+        Enum newPosition = Position.valueOf(printedPosition);
+        this.transmissions.changePosition(newPosition);
     }
 
     @Override
