@@ -59,15 +59,18 @@ public class Car {
             System.out.println("Enter new allowed position (Parking,Drive,Neutral,Reverse) except current position: " + this.transmissions.Position);
             Scanner scanner = new Scanner(System.in);
             printedPosition = scanner.next();
-            if (Objects.equals(printedPosition, Arrays.toString(Position.values()))) {
+            for (Position el : Position.values()) {
+                if(el.name().equalsIgnoreCase(printedPosition)) {
+                    positionExists = true;
+                    break;
 
-                positionExists = true;
-            } else {
-                System.out.println("You've entered not existing position");
+                } else {
+                    System.out.println("You've entered not existing position");
+                }
             }
+            Enum newPosition = Position.valueOf(printedPosition);
+            this.transmissions.changePosition(newPosition);
         }
-        Enum newPosition = Position.valueOf(printedPosition);
-        this.transmissions.changePosition(newPosition);
     }
 
     @Override
@@ -80,8 +83,6 @@ public class Car {
                 ", headlights=" + headlights +
                 '}';
     }
-
-
 }
 
 
