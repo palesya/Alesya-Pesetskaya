@@ -38,10 +38,13 @@ public class Car {
         while (!rightAngle) {
             System.out.println("Enter Steering Wheel degree: ");
             newAngle = scanner.nextInt();
-            if (newAngle < minAngle || newAngle > maxAngle) {
+            if (newAngle > minAngle || newAngle < maxAngle) {
+                rightAngle = true;
+            } else {
                 System.out.println("Please enter Steering Wheel from allowed range.");
                 System.out.println("Steering Wheel can be turned from " + minAngle + " to " + maxAngle + " degree");
-            } else rightAngle = true;
+            }
+
         }
         this.rudderAngle = this.rudderAngle + newAngle;
     }
