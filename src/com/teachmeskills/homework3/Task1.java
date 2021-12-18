@@ -9,8 +9,8 @@ public class Task1 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean validVale = false;
-        while (!validVale) {
+        boolean validValue = false;
+        while (!validValue) {
             System.out.println("Введите начало диапазона массива:");
             a = scanner.nextInt();
             System.out.println("Введите конец диапазона массива:");
@@ -22,7 +22,7 @@ public class Task1 {
             if (b < a) {
                 System.out.println("Диапазон не задан. Второе число должно быть больше первого.");
             } else
-                validVale = true;
+                validValue = true;
         }
         int count = countEven(a, b);
         System.out.println("Количество чётных элементов в массиве: " + count);

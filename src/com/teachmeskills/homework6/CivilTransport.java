@@ -32,25 +32,25 @@ public class CivilTransport extends AirTransport {
 
     public void countPassengers() {
         boolean intEntered = false;
+        int passengers=0;
         while (!intEntered) {
             System.out.println("Введите количество пассажиров");
             Scanner scanner = new Scanner(System.in);
             if (!scanner.hasNextInt()) {
                 System.out.println("Ошибка ввода. Введите целое положительное число.");
             } else {
-                int passengers = scanner.nextInt();
+                passengers = scanner.nextInt();
                 if (passengers < 0) {
                     System.out.println("Ошибка ввода. Введите целое положительное число.");
                 } else {
-                    if (passengers <= planePassengersNumber) {
-                        System.out.println("Самолёт загружен");
-                        intEntered=true;
-                    } else {
-                        System.out.println("Вам нужен самолёт побольше");
-                        intEntered=true;
-                    }
+                    intEntered = true;
                 }
             }
+        }
+        if (passengers <= planePassengersNumber) {
+            System.out.println("Самолёт загружен");
+        } else {
+            System.out.println("Вам нужен самолёт побольше");
         }
     }
 }

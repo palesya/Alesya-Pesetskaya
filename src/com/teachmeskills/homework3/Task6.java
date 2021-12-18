@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-
-public class Task3 {
+public class Task6 {
     private static Random random = new Random();
 
     public static void main(String[] args) {
@@ -19,8 +18,11 @@ public class Task3 {
         } else {
             int[] generatedArray = generateArray(count, b);
             System.out.println("Полученный массив: " + Arrays.toString(generatedArray));
-            System.out.println("Число чётных чисел в массиве: ");
-            System.out.println(countEven(generatedArray));
+            if (defineIncrease(generatedArray, count)) {
+                System.out.println("Полученный массив строго возрастающий.");
+            } else {
+                System.out.println("Полученный массив не возрастающий.");
+            }
         }
     }
 
@@ -31,14 +33,16 @@ public class Task3 {
         }
         return array;
     }
-    //ноль чётное
-    private static int countEven(int[] array) {
-        int even = 0;
-        for (int i : array) {
-            if (i % 2 == 0) {
-                even += 1;
+
+    private static boolean defineIncrease(int[] array, int count) {
+        boolean increased = true;
+        for (int i = 1; i < count; i++) {
+            if (array[i - 1] >= array[i]) {
+                increased = false;
+                break;
             }
         }
-        return even;
+        return increased;
     }
 }
+

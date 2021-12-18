@@ -33,7 +33,7 @@ public class LightTransport extends LandTransport {
 
     public void countKmWithMaxSpeed() {
         boolean intEntered = false;
-        int hours;
+        int hours = 0;
         while (!intEntered) {
             System.out.println("Введите время движения автомобиля");
             Scanner scanner = new Scanner(System.in);
@@ -45,12 +45,14 @@ public class LightTransport extends LandTransport {
                     System.out.println("Ошибка ввода. Введите целое положительное число.");
                 } else {
                     intEntered = true;
-                    int kmWithMaxSpeed = hours * maxSpeedKmPerHour;
-                    double consumedFuel = consumeFuelWithMaxSpeed(kmWithMaxSpeed);
-                    System.out.println("За время " + hours + " ч, автомобиль " + brand + " двигаясь с максимальной скоростью " + maxSpeedKmPerHour + " км/ч проедет " + kmWithMaxSpeed + " км и израсходует " + consumedFuel + " литров топлива.");
                 }
             }
         }
+        int kmWithMaxSpeed = hours * maxSpeedKmPerHour;
+        double consumedFuel = consumeFuelWithMaxSpeed(kmWithMaxSpeed);
+        System.out.println("За время " + hours + " ч, автомобиль " + brand +
+                " двигаясь с максимальной скоростью " + maxSpeedKmPerHour + " км/ч проедет " +
+                kmWithMaxSpeed + " км и израсходует " + consumedFuel + " литров топлива.");
     }
 
 

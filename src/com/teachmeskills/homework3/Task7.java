@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-
-public class Task3 {
+public class Task7 {
     private static Random random = new Random();
 
     public static void main(String[] args) {
@@ -19,26 +18,29 @@ public class Task3 {
         } else {
             int[] generatedArray = generateArray(count, b);
             System.out.println("Полученный массив: " + Arrays.toString(generatedArray));
-            System.out.println("Число чётных чисел в массиве: ");
-            System.out.println(countEven(generatedArray));
+            int maxIndex = defineIndexOfMaxElement(generatedArray, count);
+            System.out.println("Индекс последнего вхождения максимального элемента " + generatedArray[maxIndex] + " в массив: " + maxIndex);
         }
     }
+
 
     private static int[] generateArray(int count, int b) {
         int[] array = new int[count];
         for (int i = 0; i < count; i++) {
-            array[i] = random.nextInt(b+1);
+            array[i] = random.nextInt(b + 1);
         }
         return array;
     }
-    //ноль чётное
-    private static int countEven(int[] array) {
-        int even = 0;
-        for (int i : array) {
-            if (i % 2 == 0) {
-                even += 1;
+
+    private static int defineIndexOfMaxElement(int[] array, int count) {
+        int max = array[0];
+        int maxIndex = -1;
+        for (int i = 0; i < count; i++) {
+            if (array[i] >= max) {
+                max = array[i];
+                maxIndex = i;
             }
         }
-        return even;
+        return maxIndex;
     }
 }

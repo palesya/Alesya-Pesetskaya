@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class Task3 {
+public class Task4 {
     private static Random random = new Random();
 
     public static void main(String[] args) {
@@ -17,10 +17,13 @@ public class Task3 {
         if (b <= 0 || count <= 0) {
             System.out.println("Диапазон не задан. Числа должны быть больше нуля.");
         } else {
+
             int[] generatedArray = generateArray(count, b);
             System.out.println("Полученный массив: " + Arrays.toString(generatedArray));
-            System.out.println("Число чётных чисел в массиве: ");
-            System.out.println(countEven(generatedArray));
+            int[] generatedArrayWithNull = convertArrayWithNull(generatedArray,count);
+            System.out.println("Массив в котором каждый элемент с нечётным индексом заменён на ноль : ");
+            System.out.println(Arrays.toString(generatedArrayWithNull));
+
         }
     }
 
@@ -31,14 +34,13 @@ public class Task3 {
         }
         return array;
     }
-    //ноль чётное
-    private static int countEven(int[] array) {
-        int even = 0;
-        for (int i : array) {
-            if (i % 2 == 0) {
-                even += 1;
+
+    private static int [] convertArrayWithNull(int[] array,int count) {
+        for (int i=0;i < count; i++) {
+            if (i % 2 == 1) {
+                array[i] = 0;
             }
         }
-        return even;
+        return array;
     }
 }

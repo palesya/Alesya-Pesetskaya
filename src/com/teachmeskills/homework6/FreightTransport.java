@@ -29,7 +29,7 @@ public class FreightTransport extends LandTransport {
 
     public void checkCapacity() {
         boolean intEntered = false;
-        int weight;
+        int weight=0;
         while (!intEntered) {
             System.out.println("Введите количество груза в тоннах");
             Scanner scanner = new Scanner(System.in);
@@ -40,15 +40,15 @@ public class FreightTransport extends LandTransport {
                 if (weight < 0) {
                     System.out.println("Ошибка ввода. Введите целое положительное число.");
                 } else {
-                    if (weight <= liftingCapacityTons) {
-                        System.out.println("Грузовик загружен");
-                        intEntered=true;
-                    } else {
-                        System.out.println("Вам нужен грузовик побольше");
-                        intEntered=true;
-                    }
+                    intEntered = true;
                 }
             }
         }
+        if (weight <= liftingCapacityTons) {
+            System.out.println("Грузовик загружен");
+        } else {
+            System.out.println("Вам нужен грузовик побольше");
+        }
     }
 }
+
