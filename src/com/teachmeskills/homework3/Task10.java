@@ -7,31 +7,35 @@ import java.util.Scanner;
 
 public class Task10 {
     private static Random random = new Random();
+    public static int n;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите число больше 3: ");
-        int n = scanner.nextInt();
-        if (n <=3) {
-            System.out.println("Число должно быть больше 3.");
-        } else {
-            int[] generatedArray = generateArray(n);
-            System.out.println("Полученный массив: " + Arrays.toString(generatedArray));
-            int count = countEven(generatedArray, n);
-            if (count <= 0) {
-                System.out.println("Нет чётных элементов в исходном массиве. Второй массив не сгенерируется");
+        boolean validValue = false;
+        while (!validValue) {
+            System.out.println("Введите число больше 3: ");
+            n = scanner.nextInt();
+            if (n <= 3) {
+                System.out.println("Число должно быть больше 3.");
             } else {
-                int[] generatedEvenArray = generateEvenArray(generatedArray, n, count);
-                System.out.println("Полученный массив из чётных чисел: " + Arrays.toString(generatedEvenArray));
-
+                validValue = true;
             }
+        }
+        int[] generatedArray = generateArray(n);
+        System.out.println("Полученный массив: " + Arrays.toString(generatedArray));
+        int count = countEven(generatedArray, n);
+        if (count <= 0) {
+            System.out.println("Нет чётных элементов в исходном массиве. Второй массив не сгенерируется");
+        } else {
+            int[] generatedEvenArray = generateEvenArray(generatedArray, n, count);
+            System.out.println("Полученный массив из чётных чисел: " + Arrays.toString(generatedEvenArray));
         }
     }
 
     private static int[] generateArray(int n) {
         int[] array = new int[n];
         for (int i = 0; i < n; i++) {
-            array[i] = random.nextInt(n+1);
+            array[i] = random.nextInt(n + 1);
         }
         return array;
     }

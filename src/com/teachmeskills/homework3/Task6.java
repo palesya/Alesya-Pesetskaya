@@ -6,16 +6,23 @@ import java.util.Scanner;
 
 public class Task6 {
     private static Random random = new Random();
+    public static int count;
+    public static int b;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите конец диапазона массива:");
-        int b = scanner.nextInt();
-        System.out.println("Введите количество чисел в массиве:");
-        int count = scanner.nextInt();
-        if (b <= 0 || count <= 0) {
-            System.out.println("Диапазон не задан. Числа должны быть больше нуля.");
-        } else {
+        boolean validValue = false;
+        while (!validValue) {
+            System.out.println("Введите конец диапазона массива:");
+            b = scanner.nextInt();
+            System.out.println("Введите количество чисел в массиве:");
+            count = scanner.nextInt();
+            if (b <= 0 || count <= 0) {
+                System.out.println("Диапазон не задан. Числа должны быть больше нуля.");
+            } else {
+                validValue = true;
+            }
+        }
             int[] generatedArray = generateArray(count, b);
             System.out.println("Полученный массив: " + Arrays.toString(generatedArray));
             if (defineIncrease(generatedArray, count)) {
@@ -24,7 +31,6 @@ public class Task6 {
                 System.out.println("Полученный массив не возрастающий.");
             }
         }
-    }
 
     private static int[] generateArray(int count, int b) {
         int[] array = new int[count];

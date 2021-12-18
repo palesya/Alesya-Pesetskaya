@@ -7,17 +7,24 @@ import java.util.Scanner;
 
 public class Task9 {
     private static Random random = new Random();
+    public static int count;
+    public static int b;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите конец диапазона массива:");
-        int b = scanner.nextInt();
-        System.out.println("Введите количество чисел в массиве:");
-        int count = scanner.nextInt();
         int sumOfFirstHalfArray;
         int sumOfSecondHalfArray;
-        if (b <= 0 || count <= 0) {
-            System.out.println("Диапазон не задан. Числа должны быть больше нуля.");
+        boolean validValue = false;
+        while (!validValue) {
+            System.out.println("Введите конец диапазона массива:");
+            b = scanner.nextInt();
+            System.out.println("Введите количество чисел в массиве:");
+            count = scanner.nextInt();
+            if (b <= 0 || count <= 0) {
+                System.out.println("Диапазон не задан. Числа должны быть больше нуля.");
+            } else {
+                validValue = true;
+            }
         }
         int[] generatedArray1 = generateArray(count, b);
         System.out.println("Полученный массив 1: " + Arrays.toString(generatedArray1));
@@ -38,7 +45,6 @@ public class Task9 {
             System.out.println("Сумма обеих половин массива равна: " + sumOfFirstHalfArray);
         }
     }
-
 
     private static int[] generateArray(int count, int b) {
         int[] array = new int[count];

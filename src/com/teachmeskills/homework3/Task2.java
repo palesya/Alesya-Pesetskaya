@@ -26,7 +26,6 @@ public class Task2 {
             } else
                 validValue = true;
         }
-
         int count = countNotEven(a, b);
         System.out.println("Количество нечётных элементов в массиве: " + count);
         int[] generatedArray = createNotEvenArray(count, a);
