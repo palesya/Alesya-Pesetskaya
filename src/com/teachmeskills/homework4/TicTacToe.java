@@ -10,15 +10,17 @@ public class TicTacToe {
         printGeneratedMatrix(generatedMatrix);
         //1-ый ход
         String gamer = "X";
+        boolean ifWin = false;
         for (int i = 0; i < 9; i++) {
             generateMatrixWith(generatedMatrix, gamer);
             printGeneratedMatrix(generatedMatrix);
             if (findIfWin(generatedMatrix)) {
+                ifWin = true;
                 break;
             }
             gamer = changeGamer(gamer);
         }
-        if (!findIfWin(generatedMatrix)) {
+        if (!ifWin) {
             System.out.println("Игра окончена с результатом ничья");
         }
     }
@@ -68,35 +70,38 @@ public class TicTacToe {
 
     //Проверить наличие победы
     private static boolean findIfWin(String[][] array) {
-        boolean ifWin;
-        String[] line1 = new String[3];
-        String[] line2 = new String[3];
-        String[] line3 = new String[3];
-        String[] column1 = new String[3];
-        String[] column2 = new String[3];
-        String[] column3 = new String[3];
+        boolean ifWin = false;
         String[] mainDiagonal = new String[3];
         String[] SideDiagonal = new String[3];
         String[] WinX = {"X", "X", "X"};
         String[] Win0 = {"0", "0", "0"};
         for (int i = 0; i < 3; i++) {
-            line1[i] = array[0][i];
-            line2[i] = array[1][i];
-            line3[i] = array[2][i];
-            column1[i] = array[i][0];
-            column2[i] = array[i][1];
-            column3[i] = array[i][2];
             SideDiagonal[i] = array[2 - i][i];
             mainDiagonal[i] = array[i][i];
+            if (Arrays.equals(mainDiagonal, WinX) | Arrays.equals(mainDiagonal, Win0) |
+                    Arrays.equals(SideDiagonal, WinX) | Arrays.equals(SideDiagonal, Win0)) {
+                ifWin = true;
+                break;
+            }
         }
-        ifWin = Arrays.equals(line1, WinX) | Arrays.equals(line1, Win0) |
-                Arrays.equals(line2, WinX) | Arrays.equals(line2, Win0) |
-                Arrays.equals(line3, WinX) | Arrays.equals(line3, Win0) |
-                Arrays.equals(column1, WinX) | Arrays.equals(column1, Win0) |
-                Arrays.equals(column2, WinX) | Arrays.equals(column2, Win0) |
-                Arrays.equals(column3, WinX) | Arrays.equals(column3, Win0) |
-                Arrays.equals(mainDiagonal, WinX) | Arrays.equals(mainDiagonal, Win0) |
-                Arrays.equals(SideDiagonal, WinX) | Arrays.equals(SideDiagonal, Win0);
+        for (int i = 0; i < 3; i++) {
+            if (Arrays.equals(array[i], WinX) | Arrays.equals(array[i], Win0)) {
+                ifWin = true;
+                break;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String temp;
+                temp = array[i][j];
+                array[i][j] = array[j][i];
+                array[j][i] = temp;
+                if (Arrays.equals(array[i], WinX) | Arrays.equals(array[i], Win0)) {
+                    ifWin = true;
+                    break;
+                }
+            }
+        }
         if (ifWin) {
             System.out.println("Игра окончена. Есть победитель!");
         }
