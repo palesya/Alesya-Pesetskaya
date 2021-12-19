@@ -15,6 +15,7 @@ public class TicTacToe {
             generateMatrixWith(generatedMatrix, gamer);
             printGeneratedMatrix(generatedMatrix);
             if (findIfWin(generatedMatrix)) {
+                System.out.println("Это игрок " + gamer+".");
                 ifWin = true;
                 break;
             }
@@ -73,13 +74,22 @@ public class TicTacToe {
         boolean ifWin = false;
         String[] mainDiagonal = new String[3];
         String[] SideDiagonal = new String[3];
+        String[] column1 = new String[3];
+        String[] column2 = new String[3];
+        String[] column3 = new String[3];
         String[] WinX = {"X", "X", "X"};
         String[] Win0 = {"0", "0", "0"};
         for (int i = 0; i < 3; i++) {
             SideDiagonal[i] = array[2 - i][i];
             mainDiagonal[i] = array[i][i];
+            column1[i] = array[i][0];
+            column2[i] = array[i][1];
+            column3[i] = array[i][2];
             if (Arrays.equals(mainDiagonal, WinX) | Arrays.equals(mainDiagonal, Win0) |
-                    Arrays.equals(SideDiagonal, WinX) | Arrays.equals(SideDiagonal, Win0)) {
+                    Arrays.equals(SideDiagonal, WinX) | Arrays.equals(SideDiagonal, Win0) |
+                    Arrays.equals(column1, WinX) | Arrays.equals(column1, Win0) |
+                    Arrays.equals(column2, WinX) | Arrays.equals(column2, Win0) |
+                    Arrays.equals(column3, WinX) | Arrays.equals(column3, Win0)) {
                 ifWin = true;
                 break;
             }
@@ -90,20 +100,8 @@ public class TicTacToe {
                 break;
             }
         }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                String temp;
-                temp = array[i][j];
-                array[i][j] = array[j][i];
-                array[j][i] = temp;
-                if (Arrays.equals(array[i], WinX) | Arrays.equals(array[i], Win0)) {
-                    ifWin = true;
-                    break;
-                }
-            }
-        }
         if (ifWin) {
-            System.out.println("Игра окончена. Есть победитель!");
+            System.out.print("Игра окончена. Есть победитель! ");
         }
         return ifWin;
     }
