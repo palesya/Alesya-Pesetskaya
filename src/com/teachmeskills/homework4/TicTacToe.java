@@ -5,64 +5,46 @@ import java.util.Scanner;
 
 public class TicTacToe {
     public static void main(String[] args) {
-        String[][] generatedArray = generateArray();
+        String[][] generatedMatrix = generateMatrix();
         //пустой
-        printGeneratedArray(generatedArray);
+        printGeneratedMatrix(generatedMatrix);
         //1-ый ход
-        String[][] generatedArrayWithX = generateArrayWithX(generatedArray);
-        printGeneratedArray(generatedArrayWithX);
-        //2-ой ход
-        String[][] generatedArrayWith0 = generateArrayWith0(generatedArrayWithX);
-        printGeneratedArray(generatedArrayWith0);
-        //3-ий ход
-        printGeneratedArray(generateArrayWithX(generatedArrayWith0));
-        //4-ый ход
-        printGeneratedArray(generateArrayWith0(generatedArrayWithX));
-        //5-ый ход
-        printGeneratedArray(generateArrayWithX(generatedArrayWith0));
-        if (!findIfWin(generatedArrayWith0)) {
-            //6-ой ход
-            printGeneratedArray(generateArrayWith0(generatedArrayWithX));
-            if (!findIfWin(generatedArrayWithX)) {
-                //7-ой ход
-                printGeneratedArray(generateArrayWithX(generatedArrayWith0));
-                if (!findIfWin(generatedArrayWith0)) {
-                    //8-ой ход
-                    printGeneratedArray(generateArrayWith0(generatedArrayWithX));
-                    if (!findIfWin(generatedArrayWithX)) {
-                        //9-ый ход
-                        printGeneratedArray(generateArrayWithX(generatedArrayWith0));
-                        if (!findIfWin(generatedArrayWith0)) {
-                            System.out.println("Игра окончена с результатом ничья!");
-                        }
-                    }
-                }
+        String gamer = "X";
+        for (int i = 0; i < 9; i++) {
+            generateMatrixWith(generatedMatrix, gamer);
+            printGeneratedMatrix(generatedMatrix);
+            if (findIfWin(generatedMatrix)) {
+                break;
             }
+            gamer = changeGamer(gamer);
+        }
+        if (!findIfWin(generatedMatrix)) {
+            System.out.println("Игра окончена с результатом ничья");
         }
     }
 
 
-    private static String[][] generateArray() {
-        String[][] array = new String[3][3];
+    private static String[][] generateMatrix() {
+        String[][] matrix = new String[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                array[i][j] = "_";
+                matrix[i][j] = "_";
             }
         }
-        return array;
+        return matrix;
     }
 
-    private static void printGeneratedArray(String[][] array) {
+    private static void printGeneratedMatrix(String[][] matrix) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                System.out.print(" " + array[i][j] + " ");
+                System.out.print(" " + matrix[i][j] + " ");
             }
             System.out.println();
         }
     }
 
     //проверить ячейку на пустоту и сделать ход для X
-    private static String[][] generateArrayWithX(String[][] array) {
+    private static void generateMatrixWith(String[][] matrix, String gamer) {
         boolean moveDone = false;
         while (!moveDone) {
             Scanner scanner = new Scanner(System.in);
@@ -74,39 +56,14 @@ public class TicTacToe {
                 System.out.println("Неверное число. Номер ячейки должен быть от 1 до 3!");
 
             } else {
-                if (array[x - 1][y - 1] == "_") {
-                    array[x - 1][y - 1] = "X";
-                    moveDone = true;
-                } else {
-                    System.out.println("Данная ячейка занята. Сделайте другой ход.");
-
-                }
-            }
-        }
-        return array;
-    }
-
-    //проверить ячейку на пустоту и сделать ход для 0
-    private static String[][] generateArrayWith0(String[][] array) {
-        boolean moveDone = false;
-        while (!moveDone) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите номер заполняемой ячейки по горизонтали (от 1 до 3): ");
-            int x = scanner.nextInt();
-            System.out.println("Введите номер заполняемой ячейки по вертикали (от 1 до 3): ");
-            int y = scanner.nextInt();
-            if (x < 1 || y < 1 || x > 3 || y > 3) {
-                System.out.println("Неверное число. Номер ячейки должен быть от 1 до 3!");
-            } else {
-                if (array[x - 1][y - 1] == "_") {
-                    array[x - 1][y - 1] = "0";
+                if (matrix[x - 1][y - 1] == "_") {
+                    matrix[x - 1][y - 1] = gamer;
                     moveDone = true;
                 } else {
                     System.out.println("Данная ячейка занята. Сделайте другой ход.");
                 }
             }
         }
-        return array;
     }
 
     //Проверить наличие победы
@@ -144,11 +101,15 @@ public class TicTacToe {
             System.out.println("Игра окончена. Есть победитель!");
         }
         return ifWin;
-
     }
 
-
+    private static String changeGamer(String gamer) {
+        if (gamer == "X") {
+            gamer = "0";
+        } else {
+            gamer = "X";
+        }
+        return gamer;
+    }
 }
-
-
 

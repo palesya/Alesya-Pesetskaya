@@ -11,15 +11,15 @@ public class Task1to5 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите размерность матрицы: ");
         int n = scanner.nextInt();
-        int[][] generatedArray = generateArray(n);
-        printGeneratedArray(generatedArray, n);
+        int[][] generatedMatrix = generateMatrix(n);
+        printGeneratedMatrix(generatedMatrix,n);
 
-        int sumOfEvenDiagonalElements = sumMajorDiagonal(generatedArray, n);
+        int sumOfEvenDiagonalElements = sumMajorDiagonal(generatedMatrix);
         System.out.println("Сумма чётных элементов главной диагонали: " + sumOfEvenDiagonalElements);
         System.out.println("Нечетные элементы находящиеся под главной диагональю(включительно):");
-        fintNotEvenElements(generatedArray, n);
-        int multiMajorDiagonal = multiplyMajorDiagonal(generatedArray, n);
-        int multiSideDiagonal = multiplySideDiagonal(generatedArray, n);
+        fintNotEvenElements(generatedMatrix);
+        int multiMajorDiagonal = multiplyMajorDiagonal(generatedMatrix);
+        int multiSideDiagonal = multiplySideDiagonal(generatedMatrix);
         System.out.println();
         if (multiMajorDiagonal > multiSideDiagonal) {
             System.out.println("Произведение элементов главной диагонали больше и равно: " + multiMajorDiagonal);
@@ -28,19 +28,19 @@ public class Task1to5 {
         } else {
             System.out.println("Произведение элементов обеих диагоналей равно: " + multiMajorDiagonal);
         }
-        int sumOfEvenElements = sumEvenElements(generatedArray, n);
+        int sumOfEvenElements = sumEvenElements(generatedMatrix);
         if (sumOfEvenElements == -1) {
             System.out.println("Четных элементов над побочной диагональю нет.");
         } else {
             System.out.println("Cумма четных элементов стоящих над побочной диагональю (не включительно): " + sumOfEvenElements);
         }
-        int[][] transposedArray = transposeArray(generatedArray, n);
+        int[][] transposedMatrix = transposeMatrix(generatedMatrix);
         System.out.println("Транспонированная матрица: ");
-        printGeneratedArray(transposedArray, n);
+        printGeneratedMatrix(transposedMatrix,n);
 
     }
 
-    private static int[][] generateArray(int n) {
+    private static int[][] generateMatrix(int n) {
         int[][] array = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -50,61 +50,58 @@ public class Task1to5 {
         return array;
     }
 
-    private static void printGeneratedArray(int[][] array, int n) {
+    private static void printGeneratedMatrix(int[][] matrix, int n) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.print(" " + array[i][j] + " ");
+                System.out.print(" " + matrix[i][j] + " ");
             }
             System.out.println();
         }
     }
 
-    private static int sumMajorDiagonal(int[][] array, int n) {
+    private static int sumMajorDiagonal(int[][] matrix) {
         int sum = 0;
-        for (int i = 0; i < n; i++) {
-            if (array[i][i] % 2 == 0)
-                sum += array[i][i];
+        for (int i = 0; i < matrix.length; i++) {
+            if (matrix[i][i] % 2 == 0)
+                sum += matrix[i][i];
         }
         return sum;
     }
 
-    private static void fintNotEvenElements(int[][] array, int n) {
-        int count = 0;
-        for (int i = 0; i < n; i++) {
+    private static void fintNotEvenElements(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j <= i; j++) {
-                if (array[i][j] % 2 != 0) {
-                    System.out.print(array[i][j] + " ");
-                    count++;
+                if (matrix[i][j] % 2 != 0) {
+                    System.out.print(matrix[i][j] + " ");
                 }
             }
         }
     }
 
-    private static int multiplyMajorDiagonal(int[][] array, int n) {
-        int multi = array[0][0];
-        for (int i = 1; i < n; i++) {
-            multi *= array[i][i];
+    private static int multiplyMajorDiagonal(int[][] matrix) {
+        int multi = matrix[0][0];
+        for (int i = 1; i < matrix.length; i++) {
+            multi *= matrix[i][i];
         }
         return multi;
     }
 
-    private static int multiplySideDiagonal(int[][] array, int n) {
-        int maxIndex = n - 1;
-        int multi = array[maxIndex][0];
-        for (int i = maxIndex - 1; i >= 0; i--) {
-            multi *= array[i][maxIndex - i];
+    private static int multiplySideDiagonal(int[][] matrix) {
+        int multi = matrix[matrix.length-1][0];
+        for (int i = matrix.length-2; i >= 0; i--) {
+            multi *= matrix[i][matrix.length-1 - i];
         }
         return multi;
     }
 
-    private static int sumEvenElements(int[][] array, int n) {
-        int sum = -1;
+    private static int sumEvenElements(int[][] matrix) {
+        int sum = 0;
         int sum1 = 0;
         int count = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (array[i][j] % 2 == 0) {
-                    sum1 += array[i][j];
+        for (int i = 0; i < matrix.length-1; i++) {
+            for (int j = i + 1; j < matrix.length; j++) {
+                if (matrix[i][j] % 2 == 0) {
+                    sum1 += matrix[i][j];
                     count++;
                 }
             }
@@ -115,16 +112,16 @@ public class Task1to5 {
         return sum;
     }
 
-    private static int[][] transposeArray(int[][] array, int n) {
+    private static int[][] transposeMatrix(int[][] matrix) {
         int temp;
-        for (int i = 0; i < n; i++) {
-            for (int j = i+1; j < n; j++) {
-                temp = array[i][j];
-                array[i][j] = array[j][i];
-                array[j][i] = temp;
+        for (int i = 0; i < matrix.length-1; i++) {
+            for (int j = i+1; j < matrix.length; j++) {
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
             }
         }
-        return array;
+        return matrix;
     }
 
 }
