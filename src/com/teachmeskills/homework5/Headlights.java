@@ -5,8 +5,8 @@ Enum HeadlightType;
 boolean headlightsOn;
 
 
-    public Headlights(Enum headlightType, boolean headlightsOn) {
-        HeadlightType = headlightType;
+    public Headlights(HeadlightType headlightType, boolean headlightsOn) {
+        this.HeadlightType = headlightType;
         this.headlightsOn = headlightsOn;
     }
 

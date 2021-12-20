@@ -3,11 +3,11 @@ package com.teachmeskills.homework5;
 public class Transmission {
     Enum Position;
 
-    public Transmission(Enum position) {
+    public Transmission(Position position) {
         Position = position;
     }
 
-    public void changePosition(Enum position) {
+    public void changePosition(Position position) {
         if (this.Position != position) {
             this.Position = position;
         }

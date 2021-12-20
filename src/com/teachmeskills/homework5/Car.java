@@ -1,52 +1,42 @@
 package com.teachmeskills.homework5;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
-
 public class Car {
     private Engine engines;
     private Transmission transmissions;
     public int rudderAngle;
-    Enum Drive;
+    Enum Wheel;
     private Headlights headlights;
 
-    public Car(Engine engines, Transmission transmissions, int rudderAngle, Enum drive, Headlights headlights) {
+    public Car(Engine engines, Transmission transmissions, int rudderAngle, Wheel wheel, Headlights headlights) {
         this.engines = engines;
         this.transmissions = transmissions;
         this.rudderAngle = rudderAngle;
+        this.Wheel = wheel;
         this.headlights = headlights;
     }
 
-    public static void pushGasPedal() {
-        Engine.increaseEngineSpeed();
+    public void pushGasPedal() {
+engines.increaseEngineSpeed();
     }
 
-    public static void pushBreakPedal() {
-        Engine.decreaseEngineSpeed();
+    public void pushBreakPedal() {
+        engines.decreaseEngineSpeed();
     }
 
     //повернуть колесо
-    public void turnSteeringWheel() {
+    public boolean turnSteeringWheel(int newAngle) {
         int a = this.rudderAngle;
-        int newAngle = 0;
         int minAngle = -30 - a;
         int maxAngle = 30 - a;
-        System.out.println("Steering Wheel can be turned from " + minAngle + " to " + maxAngle + " degree");
-        Scanner scanner = new Scanner(System.in);
-        boolean rightAngle = false;
-        while (!rightAngle) {
-            System.out.println("Enter Steering Wheel degree: ");
-            newAngle = scanner.nextInt();
-            if (newAngle > minAngle || newAngle < maxAngle) {
-                rightAngle = true;
-            } else {
-                System.out.println("Please enter Steering Wheel from allowed range.");
-                System.out.println("Steering Wheel can be turned from " + minAngle + " to " + maxAngle + " degree");
-            }
-
+        boolean isTurned = false;
+        if (newAngle >= minAngle && newAngle <= maxAngle) {
+            this.rudderAngle = this.rudderAngle + newAngle;
+            isTurned = true;
+        } else {
+            System.out.println("Steering Wheel can't be turned on " + newAngle + " angle.");
+            System.out.println("Steering Wheel can be turned from " + minAngle + " to " + maxAngle + " degree");
         }
-        this.rudderAngle = this.rudderAngle + newAngle;
+        return isTurned;
     }
 
     public void turnCarHeadlightsOn() {
@@ -55,32 +45,20 @@ public class Car {
 
 
     //переключить передачу
-    public void changePosition() {
-        boolean positionSelected = false;
-        String printedPosition = "";
-        while (!positionSelected) {
-            System.out.println("Enter new allowed position (Parking,Drive,Neutral,Reverse) except current position: " + this.transmissions.Position);
-            Scanner scanner = new Scanner(System.in);
-            printedPosition = scanner.next();
-            boolean positionExists = false;
-            while (!positionExists) {
-                for (Position el : Position.values()) {
-                    if (el.name().equalsIgnoreCase(printedPosition) && el == this.transmissions.Position) {
-                        System.out.println("Car is already in selected Position " + this.transmissions.Position);
-                        positionExists = true;
-                    }
-                    if (el.name().equalsIgnoreCase(printedPosition) && el != this.transmissions.Position) {
-                        positionExists = true;
-                        positionSelected = true;
-                    }
-                }
-                if (!positionExists) {
-                    System.out.println("You've entered not existing position");
-                }
+    public boolean changePosition(Position newPosition) {
+        boolean isChanged = false;
+        for (Position el : Position.values()) {
+            if (el.name().equalsIgnoreCase(String.valueOf(newPosition)) && el == this.transmissions.Position) {
+                System.out.println("Car is already in selected Position " + this.transmissions.Position);
+                break;
+            }
+            if (el.name().equalsIgnoreCase(String.valueOf(newPosition)) && el != this.transmissions.Position) {
+                this.transmissions.changePosition(newPosition);
+                isChanged = true;
+                break;
             }
         }
-        Enum newPosition = Position.valueOf(printedPosition);
-        this.transmissions.changePosition(newPosition);
+        return isChanged;
     }
 
     @Override
@@ -89,7 +67,7 @@ public class Car {
                 "engines=" + engines +
                 ", transmissions=" + transmissions +
                 ", rudderAngle=" + rudderAngle +
-                ", Drive=" + Drive +
+                ", Wheel=" + Wheel +
                 ", headlights=" + headlights +
                 '}';
     }
