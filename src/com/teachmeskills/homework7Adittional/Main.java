@@ -12,7 +12,7 @@ public class Main {
 
         Box box = new Box(1000);
         Shape[] shapes = {cylinder, ball, pyramid};
-
+//находим минимальный оъём элемента
         double minVolume = 0;
         for (Shape value : shapes) {
             minVolume = shapes[0].getVolume();
@@ -20,7 +20,7 @@ public class Main {
                 minVolume = value.getVolume();
             }
         }
-
+//заполняем контейнер пока не сможет вместиться элемент с минимальным объёмом
         while (minVolume <= box.volume) {
             for (Shape shape : shapes) {
                 if (box.addShape(shape)) {
@@ -28,5 +28,7 @@ public class Main {
                 }
             }
         }
+//проверяем оставшийся объём
+        System.out.println("___Volume left "+box.volume);
     }
 }
