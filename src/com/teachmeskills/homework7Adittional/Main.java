@@ -6,19 +6,26 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Shape cylinder = new Cylinder(1.3, 2.2);
-        Shape ball = new Ball(1.5);
-        Shape pyramid = new Pyramid(6.5, 5.1);
+        Shape cylinder = new Cylinder(4.4, 2.5);
+        Shape ball = new Ball(4.5);
+        Shape pyramid = new Pyramid(9.2, 8.1);
 
         Box box = new Box(1000);
         Shape[] shapes = {cylinder, ball, pyramid};
 
-        for (Shape shape : shapes) {
-            if (!box.addShape(shape)) {
-                System.out.println(shape+ " element with "+ shape.getVolume()+" volume was not added");
-                break;
-            }else{
-                System.out.println(shape+ " element with "+ shape.getVolume()+" volume was added");
+        double minVolume = 0;
+        for (Shape value : shapes) {
+            minVolume = shapes[0].getVolume();
+            if (value.getVolume() < minVolume) {
+                minVolume = value.getVolume();
+            }
+        }
+
+        while (minVolume <= box.volume) {
+            for (Shape shape : shapes) {
+                if (box.addShape(shape)) {
+                    System.out.println(shape + " element with " + shape.getVolume() + " volume was added");
+                }
             }
         }
     }
