@@ -1,4 +1,4 @@
-package com.teachmeskills.homework7Adittional2;
+package com.teachmeskills.homework7AdittionalAbstract;
 
 public class Ball extends SolidOfRevolution {
     public Ball(double radius) {
@@ -7,7 +7,7 @@ public class Ball extends SolidOfRevolution {
 
     @Override
     public double getVolume() {
-        return 4 / 3*Math.PI * Math.pow(getRadius(), 3);
+        return (4/3)*Math.PI * Math.pow(getRadius(), 3);
     }
 
     @Override

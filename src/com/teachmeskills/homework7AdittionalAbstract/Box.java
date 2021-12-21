@@ -1,4 +1,4 @@
-package com.teachmeskills.homework7Adittional2;
+package com.teachmeskills.homework7AdittionalAbstract;
 
 import java.util.ArrayList;
 

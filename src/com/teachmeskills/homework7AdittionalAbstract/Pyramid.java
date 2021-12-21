@@ -1,4 +1,4 @@
-package com.teachmeskills.homework7Adittional2;
+package com.teachmeskills.homework7AdittionalAbstract;
 
 public class Pyramid extends Shape {
     double s;
