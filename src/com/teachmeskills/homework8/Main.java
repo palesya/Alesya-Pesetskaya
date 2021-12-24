@@ -39,8 +39,7 @@ public class Main {
         //предложении присутствует слово-палиндром, то не имеет значения какое кол-во
         //слов в предложении, оно выводится на экран.
 
-        String[] space = {".", "!", "...", "?"};
-        String[] sentences = longString.split(Arrays.toString(space));
+        String[] sentences = longString.split("[.?!\\...]");
         System.out.println("Sentences with number of words from 3 to 5 or word palindrome exists.");
         for (String sentence : sentences) {
             int wordsInLine = TextFormaterUtils.countWordsInLine(sentence);
