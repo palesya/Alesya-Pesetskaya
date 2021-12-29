@@ -3,8 +3,8 @@ package com.teachmeskills.homework6;
 import java.util.Scanner;
 
 public class MilitaryTransport extends AirTransport {
-    boolean ejectionSystem;
-    int missilesOnBoard;
+    private boolean ejectionSystem;
+    private int missilesOnBoard;
 
     public MilitaryTransport(int capacityHorsepower, int maxSpeedKmPerHour, int weight, String brand, double wingspanMetres, int minRunwayLengthMetres, boolean ejectionSystem, int missilesOnBoard) {
         super(capacityHorsepower, maxSpeedKmPerHour, weight, brand, wingspanMetres, minRunwayLengthMetres);
@@ -14,12 +14,12 @@ public class MilitaryTransport extends AirTransport {
 
     @Override
     public String toString() {
-        return "Brand: " + brand +
-                "; Capacity in horsepower: " + capacityHorsepower +
-                "; Maximum speed in Km/Hour: " + maxSpeedKmPerHour +
-                "; Weight in kilos: " + weightKilos +
-                "; Wingspan in metres: " + wingspanMetres +
-                "; Minimum runway length in metres: " + minRunwayLengthMetres+
+        return "Brand: " + getBrand() +
+                "; Capacity in horsepower: " + getCapacityHorsepower() +
+                "; Maximum speed in Km/Hour: " + getMaxSpeedKmPerHour() +
+                "; Weight in kilos: " + getWeightKilos() +
+                "; Wingspan in metres: " + getWingspanMetres() +
+                "; Minimum runway length in metres: " + getMinRunwayLengthMetres()+
                 "; Is ejection system allowed: " + ejectionSystem +
                 "; Number of missiles on board: " + missilesOnBoard;
     }
@@ -33,7 +33,7 @@ public class MilitaryTransport extends AirTransport {
     public void takeAShot() {
         if (missilesOnBoard > 0) {
             System.out.println("Ракета пошла...");
-            this.missilesOnBoard -= 1;
+            this.missilesOnBoard --;
         } else {
             System.out.println("Боеприпасы отсутствуют");
         }

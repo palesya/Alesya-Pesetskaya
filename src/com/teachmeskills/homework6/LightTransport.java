@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class LightTransport extends LandTransport {
 
-    String bodyType;
-    int carPassangersNumber;
+    private String bodyType;
+    private int carPassangersNumber;
 
     public LightTransport(int capacityHorsepower, int maxSpeedKmPerHour, int weight, String brand, int wheelNumber, double fuelConsumptionLPer100km, String bodyType, int carPassangersNumber) {
         super(capacityHorsepower, maxSpeedKmPerHour, weight, brand, wheelNumber, fuelConsumptionLPer100km);
@@ -15,12 +15,12 @@ public class LightTransport extends LandTransport {
 
     @Override
     public String toString() {
-        return "Brand: " + brand +
-                "; Capacity in horsepower: " + capacityHorsepower +
-                "; Maximum speed in Km/Hour: " + maxSpeedKmPerHour +
-                "; Weight in kilos: " + weightKilos +
-                "; Number of wheels: " + wheelNumber +
-                "; Fuel consumption in l/100km: " + fuelConsumptionLPer100km +
+        return "Brand: " + getBrand() +
+                "; Capacity in horsepower: " + getCapacityHorsepower() +
+                "; Maximum speed in Km/Hour: " + getMaxSpeedKmPerHour() +
+                "; Weight in kilos: " + getWeightKilos() +
+                "; Number of wheels: " + getWheelNumber() +
+                "; Fuel consumption in l/100km: " + getFuelConsumptionLPer100km() +
                 "; Type of Body: " + bodyType +
                 "; Number of passangers: " + carPassangersNumber;
     }
@@ -31,33 +31,17 @@ public class LightTransport extends LandTransport {
         System.out.println();
     }
 
-    public void countKmWithMaxSpeed() {
-        boolean intEntered = false;
-        int hours = 0;
-        while (!intEntered) {
-            System.out.println("Введите время движения автомобиля");
-            Scanner scanner = new Scanner(System.in);
-            if (!scanner.hasNextInt()) {
-                System.out.println("Ошибка ввода. Введите целое положительное число.");
-            } else {
-                hours = scanner.nextInt();
-                if (hours < 0) {
-                    System.out.println("Ошибка ввода. Введите целое положительное число.");
-                } else {
-                    intEntered = true;
-                }
-            }
-        }
-        int kmWithMaxSpeed = hours * maxSpeedKmPerHour;
+    public void countKmWithMaxSpeed(int hours) {
+        int kmWithMaxSpeed = hours * getMaxSpeedKmPerHour();
         double consumedFuel = consumeFuelWithMaxSpeed(kmWithMaxSpeed);
-        System.out.println("За время " + hours + " ч, автомобиль " + brand +
-                " двигаясь с максимальной скоростью " + maxSpeedKmPerHour + " км/ч проедет " +
+        System.out.println("За время " + hours + " ч, автомобиль " +  getBrand()+
+                " двигаясь с максимальной скоростью " + getMaxSpeedKmPerHour() + " км/ч проедет " +
                 kmWithMaxSpeed + " км и израсходует " + consumedFuel + " литров топлива.");
     }
 
 
     private double consumeFuelWithMaxSpeed(int kmWithMaxSpeed) {
-        return kmWithMaxSpeed * fuelConsumptionLPer100km / 100;
+        return kmWithMaxSpeed * getFuelConsumptionLPer100km() / 100;
     }
 }
 

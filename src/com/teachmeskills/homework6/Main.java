@@ -1,5 +1,7 @@
 package com.teachmeskills.homework6;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -14,13 +16,61 @@ public class Main {
         militaryTransport.print();
 
         System.out.println("______________________");
-        lightTransport.countKmWithMaxSpeed();
+        boolean intHoursEntered = false;
+        int hours = 0;
+        while (!intHoursEntered) {
+            System.out.println("Введите время движения автомобиля");
+            Scanner scanner = new Scanner(System.in);
+            if (!scanner.hasNextInt()) {
+                System.out.println("Ошибка ввода. Введите целое положительное число.");
+            } else {
+                hours = scanner.nextInt();
+                if (hours < 0) {
+                    System.out.println("Ошибка ввода. Введите целое положительное число.");
+                } else {
+                    intHoursEntered= true;
+                }
+            }
+        }
+        lightTransport.countKmWithMaxSpeed(hours);
 
         System.out.println("______________________");
-        freightTransport.checkCapacity();
+        boolean intWeightEntered = false;
+        int weight=0;
+        while (!intWeightEntered) {
+            System.out.println("Введите количество груза в тоннах");
+            Scanner scanner = new Scanner(System.in);
+            if (!scanner.hasNextInt()) {
+                System.out.println("Ошибка ввода. Введите целое положительное число.");
+            } else {
+                weight = scanner.nextInt();
+                if (weight < 0) {
+                    System.out.println("Ошибка ввода. Введите целое положительное число.");
+                } else {
+                    intWeightEntered = true;
+                }
+            }
+        }
+        freightTransport.checkCapacity(weight);
 
         System.out.println("______________________");
-        civilTransport.countPassengers();
+        boolean intPassengersEntered = false;
+        int passengers = 0;
+        while (!intPassengersEntered) {
+            System.out.println("Введите количество пассажиров");
+            Scanner scanner = new Scanner(System.in);
+            if (!scanner.hasNextInt()) {
+                System.out.println("Ошибка ввода. Введите целое положительное число.");
+            } else {
+                passengers = scanner.nextInt();
+                if (passengers < 0) {
+                    System.out.println("Ошибка ввода. Введите целое положительное число.");
+                } else {
+                    intPassengersEntered = true;
+                }
+            }
+        }
+        civilTransport.countPassengers(passengers);
 
         System.out.println("______________________");
         militaryTransport.takeAShot();
