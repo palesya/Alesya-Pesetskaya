@@ -1,8 +1,8 @@
 package com.teachmeskills.homework7_1;
 
 public class Dog extends Animal{
-    boolean trained;
-    int walksPerDay;
+    private boolean trained;
+    private int walksPerDay;
 
     public Dog(String food, String location, boolean trained, int walksPerDay) {
         super(food, location);
@@ -17,7 +17,7 @@ public class Dog extends Animal{
 
     @Override
     public void eat() {
-        System.out.println("Собака ест "+this.food);
+        System.out.println("Собака ест "+this.getFood());
     }
 
     @Override

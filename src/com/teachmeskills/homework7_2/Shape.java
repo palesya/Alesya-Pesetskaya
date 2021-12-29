@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Objects;
 
 public abstract class Shape {
-    Color color;
+    private Color color;
 
     public Shape(Color color) {
         this.color = color;
@@ -20,4 +20,7 @@ public abstract class Shape {
         return Objects.equals(color, shape.color);
     }
 
+    public Color getColor() {
+        return color;
+    }
 }

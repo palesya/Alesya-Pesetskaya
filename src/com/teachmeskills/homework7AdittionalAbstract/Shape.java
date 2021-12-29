@@ -1,8 +1,10 @@
 package com.teachmeskills.homework7AdittionalAbstract;
 
 public abstract class Shape {
-    private double volume;
+    public double volume;
 
-    public abstract double getVolume();
+    public Shape(double volume) {
+        this.volume = volume;
+    }
 
 }

@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        Shape circle=new Circle(Color.BLACK,new int[] {1,2},3);
-        Shape rectangle=new Rectangle(Color.RED,new int[] {1,1},new int[] {5,1},new int[] {3,5});
+        Shape circle=new Circle(Color.BLACK,1,2,3);
+        Shape rectangle=new Rectangle(Color.RED,1,1,5,5,3,5);
 
         Shape[] shapes = {circle,rectangle};
 

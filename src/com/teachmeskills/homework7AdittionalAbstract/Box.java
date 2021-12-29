@@ -3,29 +3,24 @@ package com.teachmeskills.homework7AdittionalAbstract;
 import java.util.ArrayList;
 
 public class Box extends Shape {
-    double volume;
 
     private ArrayList<Shape> shapes = new ArrayList<>();
 
     public Box(double volume) {
-        this.volume = volume;
+        super(volume);
     }
 
-    @Override
-    public double getVolume() {
-        return volume;
-    }
+    public double boxCapacity = this.volume;
 
     public boolean addShape(Shape shape) {
-        if (volume >= shape.getVolume()) {
+        if (boxCapacity >= shape.volume) {
             shapes.add(shape);
-            volume -=shape.getVolume();
+            boxCapacity -= shape.volume;
             return true;
         } else {
             return false;
         }
     }
-
 
 
 }

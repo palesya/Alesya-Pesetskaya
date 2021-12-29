@@ -1,13 +1,13 @@
 package com.teachmeskills.homework7AdittionalAbstract;
 
 public class Ball extends SolidOfRevolution {
-    public Ball(double radius) {
-        super(radius);
+
+    private static double calculateVolume(double radius){
+        return 4 / 3d * Math.PI * Math.pow(radius, 3);
     }
 
-    @Override
-    public double getVolume() {
-        return (4/3)*Math.PI * Math.pow(getRadius(), 3);
+    public Ball(double radius) {
+        super(calculateVolume(radius), radius);
     }
 
     @Override

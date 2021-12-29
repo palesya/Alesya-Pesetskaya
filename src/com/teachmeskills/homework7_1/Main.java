@@ -13,6 +13,9 @@ public class Main {
             animal.makeNoise();
             animal.eat();
         }
+        System.out.println("_______________________");
+        //демонстрация метода sleep
+        dog.sleep();
 
         System.out.println("_______________________");
         //все животные отправлены к ветеринару

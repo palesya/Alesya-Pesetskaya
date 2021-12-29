@@ -1,13 +1,17 @@
 package com.teachmeskills.homework7Adittional;
 
 public class Pyramid extends Shape{
-    double s;
-    double h;
+    private double s;
+    private double h;
 
     public Pyramid(double s, double h) {
-        super(s*h/3);
+        super(calculateVolume(s,h));
         this.s = s;
         this.h = h;
+    }
+
+    private static double calculateVolume(double s,double h){
+        return s*h/3;
     }
 
     @Override

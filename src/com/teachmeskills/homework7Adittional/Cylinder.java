@@ -1,11 +1,15 @@
 package com.teachmeskills.homework7Adittional;
 
 public class Cylinder extends SolidOfRevolution{
-    double height;
+    private double height;
 
     public Cylinder(double radius, double height) {
-        super(Math.PI * Math.pow(radius, 2)*height, radius);
+        super(calculateVolume(radius, height), radius);
         this.height = height;
+    }
+
+    private static double calculateVolume(double radius, double height){
+        return Math.PI * Math.pow(radius, 2)*height;
     }
 
     @Override

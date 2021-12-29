@@ -1,16 +1,17 @@
 package com.teachmeskills.homework7_2;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class Circle extends Shape{
 
-    int[] Center;
-    int radius;
+    private int centerX;
+    private int centerY;
+    private int radius;
 
-    public Circle(Color color, int[] center, int radius) {
+    public Circle(Color color, int centerX, int centerY, int radius) {
         super(color);
-        Center = center;
+        this.centerX = centerX;
+        this.centerY = centerY;
         this.radius = radius;
     }
 
@@ -25,14 +26,16 @@ public class Circle extends Shape{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Circle circle = (Circle) o;
-        return radius == circle.radius && Arrays.equals(Center, circle.Center);
+        return centerX == circle.centerX && centerY == circle.centerY && radius == circle.radius;
     }
+
 
     @Override
     public String toString() {
         return "Круг: " +
-                "Координаты центра=" + Arrays.toString(Center) +
+                "Координата центра по оси Х=" + centerX +
+                ", координата центра по оси Y=" + centerY +
                 ", радиус круга=" + radius +
-                ", цвет=" + color;
+                ", цвет=" + getColor();
     }
 }

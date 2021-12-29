@@ -1,8 +1,8 @@
 package com.teachmeskills.homework7_1;
 
 public class Horse extends Animal {
-    boolean horseshoes;
-    String assignment;
+    private boolean horseshoes;
+    private String assignment;
 
     public Horse(String food, String location, boolean horseshoes, String assignment) {
         super(food, location);
@@ -17,7 +17,7 @@ public class Horse extends Animal {
 
     @Override
     public void eat() {
-        System.out.println("Лошадь ест " +this.food);
+        System.out.println("Лошадь ест " +this.getFood());
     }
 
     @Override

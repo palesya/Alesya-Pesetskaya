@@ -1,9 +1,9 @@
 package com.teachmeskills.homework7_1;
 
 public class Cat extends Animal{
-    boolean vaccination;
-    String coatType;
-    String breed;
+    private boolean vaccination;
+    private String coatType;
+    private String breed;
 
     public Cat(String food, String location, boolean vaccination, String coatType, String breed) {
         super(food, location);
@@ -19,7 +19,7 @@ public class Cat extends Animal{
 
     @Override
     public void eat() {
-        System.out.println("Кошка ест "+this.food);
+        System.out.println("Кошка ест "+this.getFood());
     }
     @Override
     public String toString() {
