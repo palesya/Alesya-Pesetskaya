@@ -82,7 +82,7 @@ public class Cleaning {
         int matches = 0;
         for (int i = 0; i < cleaningSurfaces.toArray().length; i++) {
             for (SurfaceType cleanerSurface : cleanerSurfaces) {
-                if (Arrays.asList(cleanerSurface).contains(cleaningSurfaces.get(i))) {
+                if (Objects.equals(cleanerSurface, cleaningSurfaces.get(i))) {
                     matches++;
                 }
             }
