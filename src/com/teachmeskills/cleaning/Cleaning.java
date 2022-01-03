@@ -1,14 +1,11 @@
 package com.teachmeskills.cleaning;
 
-import com.teachmeskills.homework7Adittional.Shape;
-
 import java.util.*;
 
 public class Cleaning {
 
     public static void main(String[] args) {
 
-        SurfaceType[] surfaceTypes = SurfaceType.values();
         Cleaner Ivan = new Cleaner("Ivan", new SurfaceType[]{SurfaceType.TILE_FLOOR, SurfaceType.ENAMEL, SurfaceType.PARQUET});
         //Cleaner Marina = new Cleaner("Marina", surfaceTypes);
         Cleaner Anna = new Cleaner("Anna", new SurfaceType[]{SurfaceType.GLASS_MIRROR, SurfaceType.PAINTED_WALL, SurfaceType.TABLETOP, SurfaceType.LAMINATE});
