@@ -49,7 +49,7 @@ public class Cleaning {
             Cleaner bestMatchCleaner = findCleanerWithMaxMatch(listOfCleaners, cleaningSurfaces);
 
             //убранная поверхность
-            ArrayList<SurfaceType> cleanedSurfaces = (ArrayList<SurfaceType>) cleaningSurfaces.clone();
+            List<SurfaceType> cleanedSurfaces= new ArrayList<>(cleaningSurfaces);
             cleanedSurfaces.retainAll(List.of(bestMatchCleaner.surfaceTypes));
 
             //поверхность, которую осталось убрать
