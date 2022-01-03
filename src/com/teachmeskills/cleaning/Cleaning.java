@@ -46,39 +46,38 @@ public class Cleaning {
         while (cleaningSurfaces.toArray().length != 0) {
             //находим уборщика, который лучше подходит для уборки
             List<Cleaner> listOfCleaners = new LinkedList<>(Arrays.asList(cleaners));
-            Cleaner bestCleaner = findCleanerWithMaxMatch(listOfCleaners, cleaningSurfaces);
+            Cleaner bestMatchCleaner = findCleanerWithMaxMatch(listOfCleaners, cleaningSurfaces);
 
             //убранная поверхность
             ArrayList<SurfaceType> cleanedSurfaces = (ArrayList<SurfaceType>) cleaningSurfaces.clone();
-            cleanedSurfaces.retainAll(List.of(bestCleaner.surfaceTypes));
+            cleanedSurfaces.retainAll(List.of(bestMatchCleaner.surfaceTypes));
 
             //поверхность, которую осталось убрать
-            cleaningSurfaces.removeAll(List.of(bestCleaner.surfaceTypes));
+            cleaningSurfaces.removeAll(List.of(bestMatchCleaner.surfaceTypes));
 
-            System.out.println("This room can be cleaned by: " + bestCleaner.name + ". Cleaned surfaces:" + cleanedSurfaces);
+            System.out.println("This room can be cleaned by: " + bestMatchCleaner.name + ". Cleaned surfaces:" + cleanedSurfaces);
 
             //убираем лучшего уборщика из списка, чтобы найти следующего
-            listOfCleaners.remove(bestCleaner);
+            listOfCleaners.remove(bestMatchCleaner);
         }
     }
 
     public static Cleaner findCleanerWithMaxMatch
             (List<Cleaner> listOfCleaners, ArrayList<SurfaceType> cleaningSurfaces) {
-        Cleaner bestCleaner = listOfCleaners.get(0);
+        Cleaner bestMatchCleaner = listOfCleaners.get(0);
         int matches;
         int maxMatches = 0;
         for (Cleaner cleaner : listOfCleaners) {
             matches = calculateSurfaceMatches(cleaner.surfaceTypes, cleaningSurfaces);
             if (matches > maxMatches) {
                 maxMatches = matches;
-                bestCleaner = cleaner;
+                bestMatchCleaner = cleaner;
             }
         }
-        return bestCleaner;
+        return bestMatchCleaner;
     }
 
-    public static int calculateSurfaceMatches(SurfaceType[]
-                                                      cleanerSurfaces, ArrayList<SurfaceType> cleaningSurfaces) {
+    public static int calculateSurfaceMatches(SurfaceType[] cleanerSurfaces, ArrayList<SurfaceType> cleaningSurfaces) {
         int matches = 0;
         for (int i = 0; i < cleaningSurfaces.toArray().length; i++) {
             for (SurfaceType cleanerSurface : cleanerSurfaces) {
