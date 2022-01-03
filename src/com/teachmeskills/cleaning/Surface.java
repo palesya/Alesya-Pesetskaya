@@ -4,13 +4,11 @@ public class Surface implements CleaningMethods {
     SurfaceType surfaceType;
     double surfaceArea;
     boolean clean;
-    double coefficientOfDirt;
 
-    public Surface(SurfaceType surfaceType, double surfaceArea, boolean clean, double coefficientOfDirt) {
+    public Surface(SurfaceType surfaceType, double surfaceArea, boolean clean) {
         this.surfaceType = surfaceType;
         this.surfaceArea = surfaceArea;
         this.clean = clean;
-        this.coefficientOfDirt = coefficientOfDirt;
     }
 
     @Override
@@ -62,7 +60,7 @@ public class Surface implements CleaningMethods {
                     timeOfCleaningSquareMetreMinutes = 2;
                     break;
             }
-            timeOfSurfaceCleaning = timeOfCleaningSquareMetreMinutes*coefficientOfCleaningType*surfaceArea*coefficientOfDirt;
+            timeOfSurfaceCleaning = timeOfCleaningSquareMetreMinutes*coefficientOfCleaningType*surfaceArea;
         }
         return timeOfSurfaceCleaning;
     }
@@ -73,7 +71,6 @@ public class Surface implements CleaningMethods {
                 "surfaceType=" + surfaceType +
                 ", surfaceArea=" + surfaceArea +
                 ", clean=" + clean +
-                ", coefficientOfDirt=" + coefficientOfDirt +
                 '}';
     }
 }
