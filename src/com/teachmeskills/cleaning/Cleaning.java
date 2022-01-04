@@ -33,7 +33,7 @@ public class Cleaning {
     }
 
     public static void cleanRoom(Room room, Cleaner[] cleaners) {
-        Surface[] surfaces = room.surface;
+        Surface[] surfaces = room.surfaces;
 
         //поверхности, которые нужно убрать
         ArrayList<SurfaceType> cleaningSurfaces = new ArrayList<>();

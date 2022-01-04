@@ -3,15 +3,15 @@ package com.teachmeskills.cleaning;
 import java.util.Arrays;
 
 public class Room {
-    Surface[] surface;
+    Surface[] surfaces;
 
-    public Room(Surface[] surface) {
-        this.surface = surface;
+    public Room(Surface[] surfaces) {
+        this.surfaces = surfaces;
     }
 
     public boolean checkIfRoomIsClean() {
         boolean roomIsClean = true;
-        for (Surface surface : surface) {
+        for (Surface surface : surfaces) {
             if (!surface.clean) {
                 roomIsClean = false;
                 break;
@@ -23,13 +23,13 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                "surface=" + Arrays.toString(surface) +
+                "surfaces=" + Arrays.toString(surfaces) +
                 '}';
     }
 
     public double calculateTimeOfRoomCleaning(CleaningType cleaningType) {
         double timeOfRoomCleaning = 0;
-        for (Surface surface : surface) {
+        for (Surface surface : surfaces) {
             if (!surface.clean) {
                 timeOfRoomCleaning += surface.calculateTimeOfSurfaceCleaning(cleaningType);
             }
