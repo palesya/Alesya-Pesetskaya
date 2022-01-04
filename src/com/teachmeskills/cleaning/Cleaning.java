@@ -27,6 +27,7 @@ public class Cleaning {
             System.out.print("Time of bathroom cleaning in minutes: ");
             System.out.printf("%.3f%n", bathroom.calculateTimeOfRoomCleaning(CleaningType.CLEAR_OUT));
             cleanRoom(bathroom, cleaners);
+
         } else {
             System.out.print("This room is already clean.");
         }
@@ -37,12 +38,15 @@ public class Cleaning {
 
         //поверхности, которые нужно убрать
         ArrayList<SurfaceType> cleaningSurfaces = new ArrayList<>();
+        List<String> bathroomCleaningTools = new ArrayList<>();
         for (Surface surface : surfaces) {
             if (!surface.clean) {
                 cleaningSurfaces.add(surface.surfaceType);
+                bathroomCleaningTools.add(Arrays.toString(CleaningTools.chooseCleaningTools(CleaningType.CLEAR_OUT, surface.surfaceType)));
             }
         }
         System.out.println("Cleaning surfaces are as following: " + cleaningSurfaces);
+        System.out.println("Cleaning tools are as following:" + Arrays.toString(bathroomCleaningTools.toArray()));
         while (cleaningSurfaces.toArray().length != 0) {
             //находим уборщика, который лучше подходит для уборки
             List<Cleaner> listOfCleaners = new LinkedList<>(Arrays.asList(cleaners));
