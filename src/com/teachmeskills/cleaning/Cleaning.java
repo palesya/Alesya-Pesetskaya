@@ -27,7 +27,7 @@ public class Cleaning {
             System.out.print("Time of bathroom cleaning in minutes: ");
             System.out.printf("%.3f%n", bathroom.calculateTimeOfRoomCleaning(CleaningType.CLEAR_OUT));
             cleanRoom(bathroom, cleaners);
-
+            System.out.print("Cleaning tools for room are:"+collectCleaningToolsForRoom(bathroom));
         } else {
             System.out.print("This room is already clean.");
         }
@@ -38,22 +38,19 @@ public class Cleaning {
 
         //поверхности, которые нужно убрать
         ArrayList<SurfaceType> cleaningSurfaces = new ArrayList<>();
-        List<String> bathroomCleaningTools = new ArrayList<>();
         for (Surface surface : surfaces) {
             if (!surface.clean) {
                 cleaningSurfaces.add(surface.surfaceType);
-                bathroomCleaningTools.add(Arrays.toString(CleaningTools.chooseCleaningTools(CleaningType.CLEAR_OUT, surface.surfaceType)));
             }
         }
         System.out.println("Cleaning surfaces are as following: " + cleaningSurfaces);
-        System.out.println("Cleaning tools are as following:" + Arrays.toString(bathroomCleaningTools.toArray()));
         while (cleaningSurfaces.toArray().length != 0) {
             //находим уборщика, который лучше подходит для уборки
             List<Cleaner> listOfCleaners = new LinkedList<>(Arrays.asList(cleaners));
             Cleaner bestMatchCleaner = findCleanerWithMaxMatch(listOfCleaners, cleaningSurfaces);
 
             //убранная поверхность
-            ArrayList<SurfaceType> cleanedSurfaces= new ArrayList<>(cleaningSurfaces);
+            ArrayList<SurfaceType> cleanedSurfaces = new ArrayList<>(cleaningSurfaces);
             cleanedSurfaces.retainAll(List.of(bestMatchCleaner.surfaceTypes));
 
             //поверхность, которую осталось убрать
@@ -92,6 +89,20 @@ public class Cleaning {
         }
         return matches;
     }
+
+    public static List<String> collectCleaningToolsForRoom(Room room) {
+        Surface[] surfaces = room.surfaces;
+        List<String> cleaningToolsForRoom=new ArrayList<>();
+        List<String> cleaningToolsForSurface;
+        for (Surface surface : surfaces) {
+            if (!surface.clean) {
+                cleaningToolsForSurface = CleaningTools.chooseCleaningTools(CleaningType.CLEAR_OUT, surface.surfaceType);
+                for (int i = 0; i < cleaningToolsForSurface.toArray().length; i++) {
+                    if(!cleaningToolsForRoom.contains(cleaningToolsForSurface.get(i)))
+                    cleaningToolsForRoom.add(cleaningToolsForSurface.get(i));
+                }
+            }
+        }
+        return cleaningToolsForRoom;
+    }
 }
-
-

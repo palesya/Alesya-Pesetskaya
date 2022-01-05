@@ -1,63 +1,99 @@
 package com.teachmeskills.cleaning;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //Инструмент уборки - класс, который мы по виду поверхности будет возвращать инструменты
 public class CleaningTools {
 
-    public static String[] chooseCleaningTools(CleaningType cleaningType, SurfaceType surfaceType) {
-
+    public static List<String> chooseCleaningTools(CleaningType cleaningType, SurfaceType surfaceType) {
+        List<String> cleaningTools = new ArrayList<>();
         switch (cleaningType) {
             case DRY:
                 switch (surfaceType) {
                     case TILE_FLOOR:
                     case PARQUET:
                     case LAMINATE:
-                        return new String[]{"broom", "shovel"};
+                        cleaningTools.add("shovel");
+                        cleaningTools.add("broom");
+                        break;
                     case ENAMEL:
                     case TILE_WALL:
                     case TABLETOP:
                     case PAINTED_WALL:
                     case GLASS_MIRROR:
-                        return new String[]{"dust broom"};
+                        cleaningTools.add("dust broom");
+                        break;
                     case CARPET:
-                        return new String[]{"vacuum cleaner"};
+                        cleaningTools.add("vacuum cleaner");
+                        break;
                 }
             case WET:
                 switch (surfaceType) {
                     case CARPET:
-                        return new String[]{"water", "carpet brush", "carpet shampoo", "rag"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("carpet brush");
+                        cleaningTools.add("carpet shampoo");
+                        cleaningTools.add("rag");
+                        break;
                     case GLASS_MIRROR:
-                        return new String[]{"water", "rag", "glass cleaner"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("rag");
+                        cleaningTools.add("glass cleaner");
+                        break;
                     case TILE_WALL:
                     case TABLETOP:
                     case PAINTED_WALL:
-                        return new String[]{"water", "rag", "enamel cleaner"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("rag");
+                        break;
                     case TILE_FLOOR:
                     case PARQUET:
                     case LAMINATE:
-                        return new String[]{"mop and bucket of water", "floor cleaner"};
+                        cleaningTools.add("mop and bucket of water");
+                        cleaningTools.add("floor cleaner");
+                        break;
                     case ENAMEL:
-                        return new String[]{"water", "rag", "enamel cleaner"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("rag");
+                        cleaningTools.add("enamel cleaner");
+                        break;
                 }
             case CLEAR_OUT:
                 switch (surfaceType) {
                     case TILE_FLOOR:
                     case PARQUET:
                     case LAMINATE:
-                        return new String[]{"mop and bucket of water", "floor cleaner"};
+                        cleaningTools.add("mop and bucket of water");
+                        cleaningTools.add("floor cleaner");
+                        break;
                     case ENAMEL:
-                        return new String[]{"water", "rag", "enamel cleaner"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("rag");
+                        cleaningTools.add("enamel cleaner");
+                        break;
                     case TILE_WALL:
                     case TABLETOP:
                     case PAINTED_WALL:
-                        return new String[]{"water", "rag", "washing liquid"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("rag");
+                        cleaningTools.add("washing liquid");
+                        break;
                     case GLASS_MIRROR:
-                        return new String[]{"water", "rag", "glass cleaner", "wiper"};
+                        cleaningTools.add("water");
+                        cleaningTools.add("rag");
+                        cleaningTools.add("glass cleaner");
+                        cleaningTools.add("wiper");
+                        break;
                     case CARPET:
-                        return new String[]{"carpet dry cleaning machine", "carpet cleaner", "water"};
+                        cleaningTools.add("carpet dry cleaning machine");
+                        cleaningTools.add("carpet cleaner");
+                        cleaningTools.add("water");
+                        break;
                 }
         }
-
-        return new String[0];
+        return cleaningTools;
     }
+
 }
 
