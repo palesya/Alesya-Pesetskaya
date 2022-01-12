@@ -3,12 +3,20 @@ package com.teachmeskills.cleaning;
 import java.util.Arrays;
 
 public class Cleaner {
-    String name;
-    SurfaceType[] surfaceTypes;
+    private String name;
+    private SurfaceType[] surfaceTypes;
 
     public Cleaner(String name, SurfaceType[] surfaceTypes) {
         this.name = name;
         this.surfaceTypes = surfaceTypes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public SurfaceType[] getSurfaceTypes() {
+        return surfaceTypes;
     }
 
     @Override

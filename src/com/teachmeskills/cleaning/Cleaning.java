@@ -34,13 +34,13 @@ public class Cleaning {
     }
 
     public static void cleanRoom(Room room, Cleaner[] cleaners) {
-        Surface[] surfaces = room.surfaces;
+        Surface[] surfaces = room.getSurfaces();
 
         //поверхности, которые нужно убрать
         ArrayList<SurfaceType> cleaningSurfaces = new ArrayList<>();
         for (Surface surface : surfaces) {
-            if (!surface.clean) {
-                cleaningSurfaces.add(surface.surfaceType);
+            if (!surface.isClean()) {
+                cleaningSurfaces.add(surface.getSurfaceType());
             }
         }
         System.out.println("Cleaning surfaces are as following: " + cleaningSurfaces);
@@ -51,12 +51,12 @@ public class Cleaning {
 
             //убранная поверхность
             ArrayList<SurfaceType> cleanedSurfaces = new ArrayList<>(cleaningSurfaces);
-            cleanedSurfaces.retainAll(List.of(bestMatchCleaner.surfaceTypes));
+            cleanedSurfaces.retainAll(List.of(bestMatchCleaner.getSurfaceTypes()));
 
             //поверхность, которую осталось убрать
-            cleaningSurfaces.removeAll(List.of(bestMatchCleaner.surfaceTypes));
+            cleaningSurfaces.removeAll(List.of(bestMatchCleaner.getSurfaceTypes()));
 
-            System.out.println("This room can be cleaned by: " + bestMatchCleaner.name + ". Cleaned surfaces:" + cleanedSurfaces);
+            System.out.println("This room can be cleaned by: " + bestMatchCleaner.getName() + ". Cleaned surfaces:" + cleanedSurfaces);
 
             //убираем лучшего уборщика из списка, чтобы найти следующего
             listOfCleaners.remove(bestMatchCleaner);
@@ -69,7 +69,7 @@ public class Cleaning {
         int matches;
         int maxMatches = 0;
         for (Cleaner cleaner : listOfCleaners) {
-            matches = calculateSurfaceMatches(cleaner.surfaceTypes, cleaningSurfaces);
+            matches = calculateSurfaceMatches(cleaner.getSurfaceTypes(), cleaningSurfaces);
             if (matches > maxMatches) {
                 maxMatches = matches;
                 bestMatchCleaner = cleaner;
@@ -91,12 +91,12 @@ public class Cleaning {
     }
 
     public static List<String> collectCleaningToolsForRoom(Room room) {
-        Surface[] surfaces = room.surfaces;
+        Surface[] surfaces = room.getSurfaces();
         List<String> cleaningToolsForRoom=new ArrayList<>();
         List<String> cleaningToolsForSurface;
         for (Surface surface : surfaces) {
-            if (!surface.clean) {
-                cleaningToolsForSurface = CleaningTools.chooseCleaningTools(CleaningType.CLEAR_OUT, surface.surfaceType);
+            if (!surface.isClean()) {
+                cleaningToolsForSurface = CleaningTools.chooseCleaningTools(CleaningType.CLEAR_OUT, surface.getSurfaceType());
                 for (int i = 0; i < cleaningToolsForSurface.toArray().length; i++) {
                     if(!cleaningToolsForRoom.contains(cleaningToolsForSurface.get(i)))
                     cleaningToolsForRoom.add(cleaningToolsForSurface.get(i));
