@@ -2,12 +2,10 @@ package com.teachmeskills.homework9;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class Product implements Comparable<Product> {
-    public int id;
-    public String name;
-    public int price;
+    private int id;
+    private String name;
+    private int price;
 
     public Product(int id, String name, int price) {
         this.id = id;
@@ -15,11 +13,21 @@ public class Product implements Comparable<Product> {
         this.price = price;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
     @Override
     public int compareTo(@NotNull Product p) {
-        if (id == p.id)
-            return 0;
-        else return -1;
+        return this.getId() - p.getId();
     }
 
     @Override

@@ -22,7 +22,6 @@ public class Main {
         //не добавляет продукт с повторяющимся индексом
         productShop.addProduct(milk2);
 
-
         System.out.println("List of all products added to the shop: "+Arrays.toString(productShop.allProductsInShop()));
 
 
