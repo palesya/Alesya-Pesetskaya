@@ -1,34 +1,27 @@
 package com.teachmeskills.homework9;
 
-import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Shop {
-    public TreeSet<Product> productList;
+    public LinkedList<Product> productList;
 
-    public Shop(TreeSet<Product> productList) {
+    public Shop(LinkedList<Product> productList) {
         this.productList = productList;
     }
 
-
     // метод, который добавляет товар. При попытке добавить товар с id уже существующем в списке,вставка не производится
     public void addProduct(Product product) {
-        if (productList.toArray().length==0){
+        if (productList.toArray().length == 0) {
             productList.add(product);
             System.out.println(product.getName() + " was added to the list.");
-        }else if(!productList.contains(product)) {
+        } else if (!productList.contains(product)) {
             productList.add(product);
             System.out.println(product.getName() + " was added to the list.");
         } else {
-            System.out.println("You've tryed to add " + product.getName() + ",but product with such id " + product.getName() + " already exists");
+            System.out.println("You've tryed to add " + product.getName() + ",but product with such id " + product.getId() + " already exists");
         }
     }
-
-    //метод, который возвращает список всех продуктов в магазине
-    public Object[] allProductsInShop() {
-        return productList.toArray();
-    }
-
 
     public void removeProductFromList(int id) {
         Product removableProduct = null;
@@ -41,6 +34,18 @@ public class Shop {
             productList.remove(removableProduct);
             System.out.println(removableProduct.getName() + " was removed");
         }
+    }
+
+    public void changeProduct(Product product) {
+        if (productList.toArray().length == 0) {
+            System.out.println("No products in the list.");
+        } else if (productList.contains(product)) {
+            productList.add(product);
+            System.out.println("Product with id=" + product.getId() + " was changed to name=" + product.getName() + " woth price=" + product.getPrice());
+        } else {
+            System.out.println("Product with such id=" + product.getId() + " doesn't exist in list.");
+        }
+
     }
 }
 
