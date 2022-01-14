@@ -1,9 +1,5 @@
 package com.teachmeskills.homework9;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
-
 public class Product {
     private int id;
     private String name;

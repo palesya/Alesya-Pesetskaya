@@ -1,6 +1,5 @@
 package com.teachmeskills.homework9;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Shop {
