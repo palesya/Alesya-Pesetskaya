@@ -38,29 +38,34 @@ public class ShopMenu {
                 keyShopMenu = this.scanner.nextInt();
                 switch (keyShopMenu) {
                     case 1:
-                        printSortingMenu();
-                        System.out.print("Введите номер из меню сортировки от 1 до 3: ");
-                        keySortingMenu = this.scanner.nextInt();
-                        switch (keySortingMenu) {
-                            case 1:
-                                TreeSet<Product> sortedSet = new TreeSet<>(new SortedByPrice());
-                                sortedSet.addAll(productList);
-                                System.out.println("Продукты отсортированные по цене в порядке возрастания: " + sortedSet);
-                                break;
-                            case 2:
-                                TreeSet<Product> sortedSetDesc = new TreeSet<>(new SortedByPrice().reversed());
-                                sortedSetDesc.addAll(productList);
-                                System.out.println("Продукты отсортированные по цене в порядке убывания: " + sortedSetDesc);
-                                break;
-                            case 3:
-                                Iterator<Product> productIterator = productList.descendingIterator();
-                                System.out.println("Товары в магазине в порядке добавления(сначала новые, потом более старые):");
-                                while (productIterator.hasNext()) {
-                                    System.out.println(productIterator.next());
-                                }
-                                break;
-                            default:
-                                System.out.println("Вы ввели неверное значение.\n");
+                        if (productList.toArray().length == 0) {
+                            System.out.println("В списке ещё нет продуктов.");
+                            break;
+                        } else {
+                            printSortingMenu();
+                            System.out.print("Введите номер из меню сортировки от 1 до 3: ");
+                            keySortingMenu = this.scanner.nextInt();
+                            switch (keySortingMenu) {
+                                case 1:
+                                    TreeSet<Product> sortedSet = new TreeSet<>(new SortedByPrice());
+                                    sortedSet.addAll(productList);
+                                    System.out.println("Продукты отсортированные по цене в порядке возрастания: " + sortedSet);
+                                    break;
+                                case 2:
+                                    TreeSet<Product> sortedSetDesc = new TreeSet<>(new SortedByPrice().reversed());
+                                    sortedSetDesc.addAll(productList);
+                                    System.out.println("Продукты отсортированные по цене в порядке убывания: " + sortedSetDesc);
+                                    break;
+                                case 3:
+                                    Iterator<Product> productIterator = productList.descendingIterator();
+                                    System.out.println("Товары в магазине в порядке добавления(сначала новые, потом более старые):");
+                                    while (productIterator.hasNext()) {
+                                        System.out.println(productIterator.next());
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("Вы ввели неверное значение.\n");
+                            }
                         }
                         break;
                     case 2:
