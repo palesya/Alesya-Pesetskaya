@@ -1,6 +1,6 @@
 package com.teachmeskills.homework9aditional;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class ShopMenu {
     private Scanner scanner;
@@ -9,7 +9,11 @@ public class ShopMenu {
         this.scanner = scanner;
     }
 
+    LinkedList<Product> productList = new LinkedList<>();
+    Shop userShop = new Shop(productList);
+
     private void printShopMenu() {
+        System.out.println("Меню магазина:");
         System.out.println("1. Вывод всех товаров;");
         System.out.println("2. Добавление товара;");
         System.out.println("3. Удаление товара;");
@@ -17,55 +21,64 @@ public class ShopMenu {
         System.out.println("5. Выход;");
     }
 
+    private void printSortingMenu() {
+        System.out.println("Варианты сортировки:");
+        System.out.println("1. По цене(возрастанию);");
+        System.out.println("2. По цене(убыванию);");
+        System.out.println("3. По добавлению(сначала новые, потом более старые)");
+    }
+
     public void start() {
         if (this.scanner != null) {
-            int key;
+            int keyShopMenu = 0;
+            int keySortingMenu;
             do {
                 printShopMenu();
-                System.out.print("Введите номер из меню от 1 до 5: ");
-                key = this.scanner.nextInt();
-                switch (key) {
+                System.out.print("Введите номер из меню магазина от 1 до 5: ");
+                keyShopMenu = this.scanner.nextInt();
+                switch (keyShopMenu) {
                     case 1:
-                        /*в какой сортировке вывести:
-▪ по цене(возрастание)
-▪ по цене(убывание)
-▪ по добавлению(сначала новые, потом более старые)
-                        После выбора сортировки, из магазина получаете список товаров,
-                            сортирует*/
+                        printSortingMenu();
+                        System.out.print("Введите номер из меню сортировки от 1 до 3: ");
+                        keySortingMenu = this.scanner.nextInt();
+                        switch (keySortingMenu) {
+                            case 1:
+                                TreeSet<Product> sortedSet = new TreeSet<>(new SortedByPrice());
+                                sortedSet.addAll(productList);
+                                System.out.println("Продукты отсортированные по цене в порядке возрастания: " + sortedSet);
+                                break;
+                            case 2:
+                                TreeSet<Product> sortedSetDesc = new TreeSet<>(new SortedByPrice().reversed());
+                                sortedSetDesc.addAll(productList);
+                                System.out.println("Продукты отсортированные по цене в порядке убывания: " + sortedSetDesc);
+                                break;
+                            case 3:
+                                Iterator<Product> productIterator = productList.descendingIterator();
+                                System.out.println("Товары в магазине в порядке добавления(сначала новые, потом более старые):");
+                                while (productIterator.hasNext()) {
+                                    System.out.println(productIterator.next());
+                                }
+                                break;
+                            default:
+                                System.out.println("Вы ввели неверное значение.\n");
+                        }
                         break;
                     case 2:
-
-
-
-                        /*пользователь должен ввести из консоли 3 параметра (id, название,
-цена).
-▪ создаем объект товара(поля заполняются данными введенными
-пользователем)
-▪ добавляем товар в магазин(напоминаю, если в списке товаров уже
-существует товар с таким id, то новый товар не добавляется)*/
-
+                        userShop.addProduct();
                         break;
                     case 3:
-                        /*пользователь вводит id товара который нужно удалить
-▪ удаляем товар из магазина*/
+                        userShop.removeProductFromList();
                         break;
                     case 4:
-/*пользователь должен ввести из консоли 3 параметра (id товара для
-редактирования, новое название, новую цену).
-▪ создаем объект товара(поля заполняются данными введенными
-пользователем)
-▪ редактируем товар в магазине*/
+                        userShop.changeProduct();
                         break;
                     case 5:
-/*работа магазина завершается*/
                         break;
                     default:
-                        System.out.println("Вы ввели неверное значение...\n");
+                        System.out.println("Вы ввели неверное значение.\n");
                 }
-            } while (key != 5);
+            }
+            while (keyShopMenu != 5);
         }
     }
 }
-/*Магазин должен работать по замкнутому
-циклы, до тех пор пока пользователь в меню не выберет выход. Естественно
-незабываем про обработку всевозможных ошибок.*/

@@ -23,15 +23,19 @@ public class Shop {
     }
 
     public void removeProductFromList(int id) {
-        Product removableProduct = null;
-        for (Product product : productList) {
-            if (product.getId() == id) {
-                removableProduct = product;
+        if (productList.toArray().length == 0) {
+            System.out.println("No products in the list.");
+        } else {
+            Product removableProduct = null;
+            for (Product product : productList) {
+                if (product.getId() == id) {
+                    removableProduct = product;
+                }
             }
-        }
-        if (removableProduct != null) {
-            productList.remove(removableProduct);
-            System.out.println(removableProduct.getName() + " was removed");
+            if (removableProduct != null) {
+                productList.remove(removableProduct);
+                System.out.println(removableProduct.getName() + " was removed");
+            }
         }
     }
 
@@ -40,7 +44,7 @@ public class Shop {
             System.out.println("No products in the list.");
         } else if (productList.contains(product)) {
             productList.add(product);
-            System.out.println("Product with id=" + product.getId() + " was changed to name=" + product.getName() + " woth price=" + product.getPrice());
+            System.out.println("Product with id=" + product.getId() + " was changed to name=" + product.getName() + " with price=" + product.getPrice());
         } else {
             System.out.println("Product with such id=" + product.getId() + " doesn't exist in list.");
         }
